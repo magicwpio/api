@@ -36,16 +36,20 @@ Every response comes in the same envelope:
 
 Each example reads the token from `MAGICWP_TOKEN` and needs no extra packages.
 
-| | List sites | Create a backup |
-|---|---|---|
-| curl | [`list-sites.sh`](examples/curl/list-sites.sh) | [`create-backup.sh`](examples/curl/create-backup.sh) |
-| Node 18+ | [`list-sites.mjs`](examples/node/list-sites.mjs) | [`create-backup.mjs`](examples/node/create-backup.mjs) |
-| Python 3 | [`list_sites.py`](examples/python/list_sites.py) | [`create_backup.py`](examples/python/create_backup.py) |
-| PHP 8 | [`list-sites.php`](examples/php/list-sites.php) | [`create-backup.php`](examples/php/create-backup.php) |
+| | curl | Node 18+ | Python 3 | PHP 8 |
+|---|---|---|---|---|
+| List sites | [`.sh`](examples/curl/list-sites.sh) | [`.mjs`](examples/node/list-sites.mjs) | [`.py`](examples/python/list_sites.py) | [`.php`](examples/php/list-sites.php) |
+| Create a backup | [`.sh`](examples/curl/create-backup.sh) | [`.mjs`](examples/node/create-backup.mjs) | [`.py`](examples/python/create_backup.py) | [`.php`](examples/php/create-backup.php) |
+| Create a site and wait until it's ready | [`.sh`](examples/curl/create-site.sh) | [`.mjs`](examples/node/create-site.mjs) | [`.py`](examples/python/create_site.py) | [`.php`](examples/php/create-site.php) |
+| Add a domain (DNS records, verify, connect) | [`.sh`](examples/curl/add-domain.sh) | [`.mjs`](examples/node/add-domain.mjs) | [`.py`](examples/python/add_domain.py) | [`.php`](examples/php/add-domain.php) |
+| Purge the page cache | [`.sh`](examples/curl/purge-cache.sh) | [`.mjs`](examples/node/purge-cache.mjs) | [`.py`](examples/python/purge_cache.py) | [`.php`](examples/php/purge-cache.php) |
+| Restore a backup (or list backups) | [`.sh`](examples/curl/restore-backup.sh) | [`.mjs`](examples/node/restore-backup.mjs) | [`.py`](examples/python/restore_backup.py) | [`.php`](examples/php/restore-backup.php) |
 
 ```bash
 node examples/node/list-sites.mjs
 python3 examples/python/create_backup.py <site_id>
+php examples/php/restore-backup.php <site_id>            # lists backups
+php examples/php/restore-backup.php <site_id> <backup_id>
 ```
 
 ## Updating the spec
