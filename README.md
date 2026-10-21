@@ -36,6 +36,15 @@ Every response comes in the same envelope:
 
 Each example reads the token from `MAGICWP_TOKEN` and needs no extra packages.
 
+To keep the token in a file instead of your shell history, copy
+[`.env.example`](.env.example) to `.env`, fill it in, and load it:
+
+```bash
+cp .env.example .env
+set -a; source .env; set +a      # any language
+node --env-file=.env examples/node/list-sites.mjs   # Node 20.6+
+```
+
 | | curl | Node 18+ | Python 3 | PHP 8 |
 |---|---|---|---|---|
 | List sites | [`.sh`](examples/curl/list-sites.sh) | [`.mjs`](examples/node/list-sites.mjs) | [`.py`](examples/python/list_sites.py) | [`.php`](examples/php/list-sites.php) |
