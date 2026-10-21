@@ -1,0 +1,46 @@
+name: API bug
+description: An endpoint, the spec or an example doesn't work as documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Never paste an API token** (`mwp_…`). Remove it from requests and logs before posting.
+        For security problems, email security@magicwp.io instead of opening an issue.
+  - type: input
+    id: endpoint
+    attributes:
+      label: Endpoint or file
+      placeholder: POST /v1/sites/{site_id}/backups, or examples/node/create-site.mjs
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: Request
+      description: The request you sent, without the token.
+      render: shell
+      placeholder: |
+        curl -X POST https://api.magicwp.io/v1/sites/<site_id>/backups \
+          -H "Authorization: Bearer $MAGICWP_TOKEN" \
+          -H "Content-Type: application/json" -d '{"label": "test"}'
+  - type: textarea
+    id: response
+    attributes:
+      label: Response
+      description: The status code and body you got back (the `code` and `message` fields help most).
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: when
+    attributes:
+      label: When it happened
+      description: The response's `timestamp` field, so we can find it in our logs.
+      placeholder: 2026-10-21T09:30:00Z

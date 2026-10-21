@@ -58,6 +58,11 @@ php examples/php/restore-backup.php <site_id> <backup_id>
 curl -fsS https://api.magicwp.io/v1/openapi.json -o openapi.json
 ```
 
+## Issues and security
+
+Found a bug or need an endpoint? [Open an issue](https://github.com/magicwpio/api/issues/new/choose).
+For security problems, see [SECURITY.md](SECURITY.md) and email security@magicwp.io; please don't open a public issue.
+
 ## License
 
 [MIT](LICENSE)

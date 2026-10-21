@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security problem
+    url: https://github.com/magicwpio/api/blob/main/SECURITY.md
+    about: Please don't open a public issue. Email security@magicwp.io instead.
+  - name: Help with your account or a site
+    url: https://docs.magicwp.io
+    about: For questions about your own sites, billing or account, contact support from the dashboard.

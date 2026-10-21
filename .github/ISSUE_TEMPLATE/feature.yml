@@ -1,0 +1,21 @@
+name: API request
+description: Ask for a new endpoint, field or example.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: What you're trying to do
+      description: The task, not the solution. For example "back up every client site before a plugin update".
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: How you do it today
+      description: The dashboard, a workaround, or not at all.
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help
+      description: An endpoint, a field, a filter, an example in another language...
