@@ -1,5 +1,9 @@
 # MagicWP API
 
+[![License: MIT](https://img.shields.io/github/license/magicwpio/api?color=blue)](LICENSE)
+[![Docs](https://img.shields.io/badge/docs-docs.magicwp.io%2Fapi-2563eb)](https://docs.magicwp.io/api)
+[![OpenAPI 3.1](https://img.shields.io/badge/OpenAPI-3.1-6ba539)](openapi.json)
+
 The MagicWP public API lets you manage your WordPress sites from your own code:
 sites, backups, domains, PHP, caching, Cloudflare and more. This repo holds the
 OpenAPI spec and a few short examples.
