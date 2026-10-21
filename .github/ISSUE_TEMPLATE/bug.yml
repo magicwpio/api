@@ -43,4 +43,4 @@ body:
     attributes:
       label: When it happened
       description: The response's `timestamp` field, so we can find it in our logs.
-      placeholder: 2026-10-21T09:30:00Z
+      placeholder: "2026-10-21T09:30:00Z"
