@@ -25,12 +25,54 @@ Every response comes in the same envelope:
 { "success": true, "data": { "items": [ ... ], "next_cursor": null }, "message": "...", "status_code": 200, "timestamp": "..." }
 ```
 
+- **Errors** carry a `code`; see [Error codes](#error-codes).
 - **Lists** are paged: `?limit=` (1–100, default 50) and `?cursor=`. Pass
   `next_cursor` back until it is `null`.
 - **Long actions** (backups, restores, clones, ...) return a `task`. Poll
   `GET /v1/tasks/{task_id}` until `status` is `completed` or `failed`.
 - **Retries:** heavy writes accept an `Idempotency-Key` header.
 - **Limits:** 300 reads and 60 writes per minute per token.
+
+## Error codes
+
+Errors use the same envelope with `"success": false`, a stable `code`, a
+human `message`, and any details in `data`:
+
+```json
+{ "success": false, "code": "permission_denied", "message": "...", "data": { "code": "permission_denied", "permission": "backups.manage" }, "status_code": 403, "timestamp": "..." }
+```
+
+Branch on the top-level `code`, not on `message`. New codes may be added; existing ones keep
+their meaning. The full list is the `ErrorCode` schema in
+[`openapi.json`](openapi.json).
+
+| Code | HTTP | Meaning |
+|---|---|---|
+| `unauthenticated` | 401 | The token is missing, wrong, expired or revoked. |
+| `permission_denied` | 403 | The token or your role lacks the permission named in `data.permission`. |
+| `forbidden` | 403 | Not allowed. |
+| `owner_only` | 403 | Only the workspace Owner can do this. |
+| `ip_not_allowed` | 403 | The token isn't allowed from this IP address. |
+| `token_wrong_workspace` | 403 | The token belongs to a different workspace. |
+| `workspace_locked` | 403 | The workspace is locked. |
+| `workspace_2fa_required` | 403 | This workspace requires two-factor authentication. |
+| `owner_2fa_required` | 403 | The workspace Owner must turn on two-factor authentication first. |
+| `limit_reached` | 403/409 | A plan or per-site limit has been reached. |
+| `not_found` | 404 | It doesn't exist, or isn't in this token's workspace. |
+| `gone` | 410 | It's no longer available. |
+| `bad_request` | 400 | The request can't be carried out as sent. |
+| `site_not_ready` | 400 | The site isn't in a state that allows this yet (still being created, for example). |
+| `validation_error` | 422 | The request failed validation; `data` lists the fields. |
+| `method_not_allowed` | 405 | This method isn't supported on this path. |
+| `payload_too_large` | 413 | The request body is too large. |
+| `conflict` | 409 | The item's current state doesn't allow this. |
+| `site_busy` | 409 | Another action is running on this site; retry when it finishes. |
+| `dns_records_exist` | 409 | The domain already has DNS records that would be replaced. |
+| `idempotency_in_progress` | 409 | A request with this `Idempotency-Key` is still running; retry shortly. |
+| `idempotency_key_reused` | 422 | This `Idempotency-Key` was already used with a different request. |
+| `rate_limited` | 429 | Too many requests; wait for the `Retry-After` header's seconds. |
+| `upstream_error` | 502/503/504 | The hosting server or a provider didn't complete the action; retry later. |
+| `internal_error` | 500 | Something failed on our side. |
 
 ## Examples
 
